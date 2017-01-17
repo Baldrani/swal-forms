@@ -17,7 +17,8 @@
   height: initial;
 }
 .swal-form input.nice-input:focus,
-.swal-form input.nice-input.focus {
+.swal-form input.nice-input.focus,
+.swal-form textarea.nice-input:focus {
   outline: none;
   border: solid 1px #707070;
   box-shadow: 0 0 5px 1px #969696;
@@ -27,4 +28,18 @@
   width: initial !important;
   height: initial !important;
   display: initial !important;
+}
+
+.swal-form textarea{
+    display: block;
+    margin: 0;
+    width: 96%;
+    font-family: sans-serif;
+    font-size: 18px;
+    box-shadow: none;
+    padding: 10px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border 0.3s;
+    height: initial;
+    background-color: #fff !important;
 }

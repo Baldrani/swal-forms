@@ -196,6 +196,7 @@
       placeholder: field.placeholder || camelCaseToHuman(field.id),
       value: field.value || '',
       type: field.type || 'text',
+      pattern: field.pattern || '',
       options: field.options || [],
       required: field.required,
       isRadioOrCheckbox: function () {
@@ -203,17 +204,27 @@
       },
       toHtml: function () {
         var inputTag
-        if (input.type !== 'select') {
-          inputTag = t("<input id='{id}' class='{clazz} swal-form-field' type='{type}' name='{name}'" +
-            " value='{value}' title='{placeholder}' placeholder='{placeholder}'" +
-            ' data-swal-forms-required={required}>', input)
-        } else {
-          inputTag = t("<select id='{id}' class='{clazz} swal-form-field' name='{name}'" +
-            " value='{value}' title='{placeholder}' style='width:100%'>" +
-            ' data-swal-forms-required={}', input) +
-              input.options.reduce(toHtmlOptions, '') +
-            '</select>'
+
+        //A améliorer
+        switch (input.type) {
+          case 'textarea':
+              inputTag = t("<textarea name='textarea' rows='5' id='{id}' class='{clazz} swal-form-field' type='{type}' name='{name}'" +
+              " value='{value}' title='{placeholder}' placeholder='{placeholder}' pattern='{pattern}'" +
+              " data-swal-forms-required={required}></textarea>" , input)
+              break;
+          case 'select':
+            inputTag = t("<select id='{id}' class='{clazz} swal-form-field' name='{name}'" +
+              " value='{value}' title='{placeholder}' style='width:100%'>" +
+              ' data-swal-forms-required={}', input) +
+                input.options.reduce(toHtmlOptions, '') +
+              '</select>'
+              break;
+          default:
+            inputTag = t("<input id='{id}' class='{clazz} swal-form-field' type='{type}' name='{name}'" +
+              " value='{value}' title='{placeholder}' placeholder='{placeholder}' pattern='{pattern}'" +
+              " data-swal-forms-required={required}>", input)
         }
+
         var labelTag = t("<label for='{id}'>{label}</label>", input)
 
         return inputTag + labelTag
