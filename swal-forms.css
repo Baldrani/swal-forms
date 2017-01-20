@@ -42,4 +42,5 @@
     transition: box-shadow 0.3s, border 0.3s;
     height: initial;
     background-color: #fff !important;
+    resize: vertical;
 }
